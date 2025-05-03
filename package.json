@@ -2,16 +2,10 @@
   "name": "components-switch",
   "version": "1.0.0",
   "type": "module",
-  "files": ["dist"],
-  "types": "dist/index.d.ts",
-  "main": "dist/components-switch.cjs.js",
-  "module": "dist/components-switch.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/components-switch.es.js",
-      "require": "./dist/components-switch.cjs.js"
-    }
-  },
+  "source": "src/index.ts",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "author": "Łukasz Rafa <lkr.rafa@gmail.com> (https://github.com/Luka-stack)",
   "description": "A lightweight React utility component library featuring Switch and Match for conditional rendering, inspired by SolidJS. Simplifies readable and declarative conditional logic in JSX.",
@@ -31,7 +25,12 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npm run build:core && npm run pack-and-extract",
+    "build:core": "microbundle --jsx React.createElement --jsxFragment React.Fragment",
+    "pack-and-extract": "yarn pack -f components-switch.tgz && npm run rm-pkg && npm run extract-pkg",
+    "rm-pkg": "rimraf node_modules/components-switch && mkdir node_modules/components-switch",
+    "extract-pkg": "tar -xzf components-switch.tgz -C node_modules/components-switch --strip-components 1 && rimraf components-switch.tgz",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -41,7 +40,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
-    "@types/node": "^22.15.3",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
@@ -49,8 +47,25 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "microbundle": "^0.15.1",
+    "mkdirp": "^3.0.1",
+    "rimraf": "^6.0.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "vite-plugin-dts": "^4.5.3"
+  },
+  "main": "dist/components-switch.js",
+  "module": "dist/components-switch.esm.mjs",
+  "umd:main": "dist/components-switch.umd.js",
+  "unpkg": "dist/components-switch.umd.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/components-switch.js",
+      "import": "./dist/components-switch.esm.mjs",
+      "umd": "./dist/components-switch.umd.js"
+    },
+    "./package.json": "./package.json"
   }
 }

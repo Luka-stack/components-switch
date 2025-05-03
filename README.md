@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+# 🔀 components-switch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A lightweight React utility component library featuring `Switch` and `Match` for elegant conditional rendering—**inspired by SolidJS**, made for React.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🧠 Declarative conditional rendering
+- 💡 Inspired by SolidJS's `Switch/Match` logic
+- 🔩 Tiny footprint & zero dependencies
+- ⚛️ Fully typed and compatible with React 17/18+
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📦 Installation
+
+```bash
+npm install components-switch
+```
+Or with yarn:
+```bash
+yarn add react-switch-match
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# 🧱 Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```tsx
+import { Switch, Match } from 'react-switch-match';
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+function Dashboard() {
+  return (
+    <Switch fallback={<p>If nothing is true, show this</p>}>
+      <Match when={shouldShowA}>
+        <Table />
+      </Match>
+      <Match when={shouldShowB() === true}>
+        <Analytics />
+      </Match>
+      <Match when={true}>
+        <SomethingElse />
+      </Match>
+    </Switch>
+  );
+}
 ```
+
+```tsx
+import { Switch, Match } from 'react-switch-match';
+
+function Greeting({ isLoggedIn }: { isLoggedIn: boolean }) {
+  return (
+    <Switch fallback={<p>Please log in.</p>}>
+      <Match when={isLoggedIn}>
+        <p>Welcome back!</p>
+      </Match>
+    </Switch>
+  );
+}
+```
+
+# 📘 API
+### `<Switch fallback={Component}>` Renders the **matching `<Match>`** child. Accepts any valid React node as children. If where is no match, fallback will be shown.
+
+### `<Match when={boolean}>` Renders its children **only if `when` is `true`**. Used within a `<Switch>` block.”
+
+# MIT © (https://github.com/Luka-stack)
