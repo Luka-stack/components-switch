@@ -1,5 +1,8 @@
 # 🔀 components-switch
 
+[![npm](https://img.shields.io/npm/v/components-switch?style=for-the-badge)](https://www.npmjs.com/package/components-switch)
+[![NPM](https://img.shields.io/npm/l/components-switch?style=for-the-badge)](https://github.com/Luka-stack/components-switch/blob/main/LICENSE)
+
 > A lightweight React utility component library featuring `Switch` and `Match` for elegant conditional rendering—**inspired by SolidJS**, made for React.
 
 ---
@@ -23,7 +26,7 @@ Or with yarn:
 yarn add react-switch-match
 ```
 
-# 🧱 Usage
+## 🧱 Usage
 
 ```tsx
 import { Switch, Match } from 'react-switch-match';
@@ -59,9 +62,9 @@ function Greeting({ isLoggedIn }: { isLoggedIn: boolean }) {
 }
 ```
 
-# 📘 API
+## 📘 API
 ### `<Switch fallback={Component}>` Renders the **matching `<Match>`** child. Accepts any valid React node as children. If where is no match, fallback will be shown.
 
 ### `<Match when={boolean}>` Renders its children **only if `when` is `true`**. Used within a `<Switch>` block.”
 
-# MIT © (https://github.com/Luka-stack)
+## MIT © (https://github.com/Luka-stack)
